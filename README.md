@@ -127,7 +127,7 @@ La première copie de secours d'un projet dans une session est toujours faite av
 - Les projets stockés en base de données sont enregistrés, sans copie de secours ni contrôle de fichier.
 - Un projet dans un dossier en lecture seule est signalé une fois et n'est pas écrit.
 - La détection d'une modification externe compare la date et la taille du fichier. Un outil de synchronisation qui touche le fichier sans le changer peut la déclencher à tort : « Enregistrer le projet maintenant » ou la réouverture du projet lève l'alerte.
-- Version 0.x : la logique est couverte par 115 tests automatisés (QGIS simulé) et les fenêtres sont vérifiées sous Qt 5 et Qt 6. Les retours d'usage dans QGIS 3.x et 4.x sont les bienvenus dans les [Issues](https://github.com/steph20-seka/autosave-data-qgis/issues).
+- Version 0.x : la logique est couverte par 116 tests automatisés (QGIS simulé) et les fenêtres sont vérifiées sous Qt 5 et Qt 6. Les retours d'usage dans QGIS 3.x et 4.x sont les bienvenus dans les [Issues](https://github.com/steph20-seka/autosave-data-qgis/issues).
 
 ## Compatibilité
 

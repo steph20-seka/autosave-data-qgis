@@ -343,6 +343,7 @@ class AutoSaveDataPlugin:
             "state": self._indicator.text() if self._indicator is not None else "",
             "last_saved": self._last_saved_text,
             "backups": len(core.list_backups(filename)) if filename else 0,
+            "backup_dir": core.backup_dir_for(filename) if filename else "",
         }
         dialog = SettingsDialog(self.config, self.iface.mainWindow(), info)
         runner = getattr(dialog, "exec", None) or dialog.exec_
@@ -403,7 +404,7 @@ class AutoSaveDataPlugin:
             self._conflict = False
             self._warned_external = False
             self._remember_signature(QgsProject.instance().fileName())
-            self._session("set_last_save")
+            self._session("set_last_save", QgsProject.instance().fileName())
 
     def _remember_signature(self, filename):
         """Mémorise l'état du fichier projet pour repérer une modification externe."""
@@ -710,7 +711,7 @@ class AutoSaveDataPlugin:
     def _notify_saved(self, filename):
         stamp = time.strftime("%H:%M:%S")
         self._last_saved_text = stamp
-        self._session("set_last_save")
+        self._session("set_last_save", filename)
         self._set_indicator(core.IND_SAVED)
         text = "Projet enregistré automatiquement à {}".format(stamp)
         self._status(text, 6000)
