@@ -1,0 +1,21 @@
+[general]
+name=AutoSave Data
+qgisMinimumVersion=3.22
+qgisMaximumVersion=4.99
+description=Enregistre automatiquement le projet QGIS après vos modifications, sans rien demander, et se met en pause pendant l'édition des couches.
+about=AutoSave Data enregistre le projet dès que vous marquez une pause après une modification (mise en page, ajout ou suppression de couches, styles, résultats de traitements). Aucune fenêtre de confirmation. Tant qu'une couche vectorielle est en édition (vectorisation, saisie) ou qu'un traitement tourne, rien n'est enregistré : le plugin patiente puis reprend. Une copie de secours horodatée du fichier projet est faite avant l'écrasement.
+version=0.3.0
+author=Stéphane Seka Kouassi
+email=Stephenseka33@gmail.com
+category=Plugins
+homepage=https://github.com/steph20-seka/autosave-data-qgis
+repository=https://github.com/steph20-seka/autosave-data-qgis
+tracker=https://github.com/steph20-seka/autosave-data-qgis/issues
+tags=autosave,sauvegarde,projet,backup,enregistrement
+icon=icon.png
+experimental=True
+deprecated=False
+hasProcessingProvider=no
+changelog=
+    0.3.0
+        - Version initiale : enregistrement automatique silencieux, pause pendant l'édition, copies de secours, reprise après arrêt brutal.
