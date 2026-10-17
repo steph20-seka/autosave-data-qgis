@@ -585,7 +585,10 @@ class SessionTracker:
         self.project = project or ""
         self._write()
 
-    def set_last_save(self):
+    def set_last_save(self, project=None):
+        """Note un enregistrement ; `project` suit un changement de nom (Enregistrer sous)."""
+        if project is not None:
+            self.project = project or ""
         self.last_save = self.clock()
         self._write()
 

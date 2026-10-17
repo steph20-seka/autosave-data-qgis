@@ -661,6 +661,9 @@ def test_settings_dialog_receives_the_project_dashboard(env, monkeypatch):
     assert info["name"] == "carte.qgz" and info["has_file"] is True
     assert info["backups"] >= 1
     assert info["last_saved"] and "enregistré" in info["state"]
+    # Le vrai dossier des copies est transmis à la fenêtre, pas un nom générique
+    assert info["backup_dir"] == str(env.file.parent / "carte_sauvegardes")
+    assert dialog.last.info["backup_dir"].endswith("_sauvegardes")
 
 
 def test_settings_changes_are_applied_only_when_accepted(env, monkeypatch):
@@ -842,3 +845,22 @@ def test_journal_follows_project_and_saves(env):
     env.project.readProject.emit()                  # un autre projet est ouvert
     data = json.loads(next(sessions.iterdir()).read_text())
     assert data["project"].endswith("autre.qgz")
+
+
+def test_journal_follows_save_as_to_another_file(env):
+    """Enregistrer sous change le nom du projet sans rouvrir ni fermer : le journal
+    doit suivre, sinon la reprise proposerait l'ancien projet (constaté dans QGIS)."""
+    import json
+    sessions = env.dir / "_profil" / "AutoSaveData" / "sessions"
+    env.project.filename = str(env.dir / "test_reprise.qgz")   # Enregistrer sous
+    env.project.projectSaved.emit()                             # enregistrement manuel
+    data = json.loads(next(sessions.iterdir()).read_text())
+    assert data["project"].endswith("test_reprise.qgz")
+    assert data["last_save"] is not None
+
+    env.project.filename = str(env.dir / "troisieme.qgz")      # puis un autre nom, en auto
+    env.project.dirty = True
+    env.project.dirtySet.emit()
+    env.debounce.fire()
+    data = json.loads(next(sessions.iterdir()).read_text())
+    assert data["project"].endswith("troisieme.qgz")

@@ -8,7 +8,7 @@ import os
 from qgis.PyQt.QtGui import QPixmap
 from qgis.PyQt.QtWidgets import (QCheckBox, QDialog, QDialogButtonBox,
                                  QFormLayout, QFrame, QGroupBox, QHBoxLayout,
-                                 QLabel, QListWidget, QListWidgetItem,
+                                 QLabel, QLineEdit, QListWidget, QListWidgetItem,
                                  QPushButton, QSpinBox, QVBoxLayout)
 
 from . import core
@@ -131,6 +131,16 @@ class SettingsDialog(QDialog):
                             QLabel(info.get("last_saved") or "aucun pour le moment"))
         backups = int(info.get("backups") or 0)
         project_form.addRow("Copies de secours", QLabel(str(backups)))
+        backup_dir = info.get("backup_dir") or ""
+        if backup_dir:
+            # Champ en lecture seule sur une ligne : un long chemin ne déforme pas
+            # la fenêtre, et on peut le sélectionner pour le copier.
+            folder_label = QLineEdit(backup_dir)
+            folder_label.setReadOnly(True)
+            folder_label.setCursorPosition(0)
+            folder_label.setToolTip(backup_dir)
+            folder_label.setStyleSheet("QLineEdit { background: transparent; border: none; }")
+            project_form.addRow("Dossier des copies", folder_label)
         hint = None
         if not has_file:
             hint = QLabel("Enregistrez d'abord le projet : Projet > Enregistrer sous.")

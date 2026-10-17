@@ -10,6 +10,10 @@ Journal détaillé des itérations de travail (essais, corrections intermédiair
 - Réglage « Proposer la reprise après un arrêt brutal » (activé par défaut).
 - Fenêtres de réglages et de restauration aux couleurs améthyste (en-tête dégradé, boutons, groupes), avec une feuille de style qui suit le thème clair ou sombre de QGIS.
 
+### Corrigé
+- Le journal de session ne suivait pas « Enregistrer sous » : après un changement de nom de projet, la reprise aurait proposé l'ancien projet (constaté lors du test dans QGIS 3.44).
+- Les réglages affichent le dossier réel des copies de secours au lieu d'un nom générique.
+
 ### Limites
 - La reprise ne peut redonner que ce qui est sur le disque : les modifications faites depuis le dernier enregistrement, et les objets d'une couche en édition non validés, sont perdus.
 - Les versions proposées sont celles des copies de secours (une toutes les 10 min par défaut, 10 conservées). Une granularité plus fine (3 minutes) demande un instantané indépendant du projet ouvert, non encore validé dans un QGIS réel.

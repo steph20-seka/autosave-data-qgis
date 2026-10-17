@@ -123,7 +123,7 @@ The first backup of a project in a session is always made before the first overw
 - Saving a large project briefly freezes the interface. The adaptive pause reduces this without removing it.
 - Projects stored in a database are saved, without backup copies or file check.
 - A project in a read-only folder is reported once and is not written.
-- Version 0.x: the logic is covered by 115 automated tests (simulated QGIS) and the dialogs are checked under Qt 5 and Qt 6. Feedback from real use in QGIS 3.x and 4.x is welcome in the [Issues](https://github.com/steph20-seka/autosave-data-qgis/issues).
+- Version 0.x: the logic is covered by 116 automated tests (simulated QGIS) and the dialogs are checked under Qt 5 and Qt 6. Feedback from real use in QGIS 3.x and 4.x is welcome in the [Issues](https://github.com/steph20-seka/autosave-data-qgis/issues).
 
 ## Compatibility
 
